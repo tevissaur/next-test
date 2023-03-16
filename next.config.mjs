@@ -20,5 +20,16 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    domains: ["via.placeholder.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+        port: '',
+        pathname: "/image/upload/**"
+      }
+    ]
+  }
 };
 export default config;

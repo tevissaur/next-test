@@ -1,20 +1,43 @@
 import { type NextPage } from "next";
 import { useSession, signOut, signIn } from "next-auth/react";
 import Head from "next/head";
-import { Component } from "react";
+import Image from "next/image";
+import Article from "~/components/article";
+import Card from "~/components/card";
 import Header from "~/components/header";
-import Layout from "~/components/layout";
 import { api } from "~/utils/api";
 
-const Home: NextPage = (props) => {
+const AboutMe: NextPage = () => {
+  const {
+    data: article,
+    isLoading,
+    isError,
+    isSuccess,
+  } = api.example.getArticleByTitle.useQuery({ title: "About Me" });
   return (
     <>
+      <Image
+        className="m-10 rounded-full"
+        src="https://via.placeholder.com/640x640"
+        alt="this is a placeholder image"
+        width={360}
+        height={360}
+      />
+      {!isLoading && isSuccess && article ? (
+        <Article
+          title={article.title}
+          content={article.content}
+          key={article.id}
+        />
+      ) : (
+        "Loading!"
+      )}
       <AuthShowcase />
     </>
   );
 };
 
-export default Home;
+export default AboutMe;
 
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();

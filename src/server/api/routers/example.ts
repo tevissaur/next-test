@@ -18,7 +18,27 @@ export const exampleRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.example.findMany();
   }),
-
+  getArticles: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.article.findMany();
+  }),
+  getProjects: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.project.findMany();
+  }),
+  getArticleByTitle: publicProcedure
+    .input(z.object({ title: z.string() }))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.article.findFirst({
+        select: {
+          id: true,
+          title: true,
+          content: true,
+          author: true,
+        },
+        where: {
+          title: input.title,
+        },
+      });
+    }),
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
   }),
