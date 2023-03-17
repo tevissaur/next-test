@@ -5,6 +5,7 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
+import { githubApiUrl } from "~/utils/constants";
 
 export const exampleRouter = createTRPCRouter({
   hello: publicProcedure
@@ -24,10 +25,10 @@ export const exampleRouter = createTRPCRouter({
   getProjects: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.project.findMany();
   }),
-  getArticleByTitle: publicProcedure
+  getArticlesByTitle: publicProcedure
     .input(z.object({ title: z.string() }))
     .query(({ input, ctx }) => {
-      return ctx.prisma.article.findFirst({
+      return ctx.prisma.article.findMany({
         select: {
           id: true,
           title: true,
@@ -39,7 +40,36 @@ export const exampleRouter = createTRPCRouter({
         },
       });
     }),
+  getGithubRepoInfo: publicProcedure
+    .input(z.object({ repoName: z.string(), owner: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const response = await fetch(
+        `${githubApiUrl}/repos/${input.owner}/${input.repoName}`,
+        {
+          headers: {
+            Authorization: `token ${process.env.GITHUB_TOKEN}`,
+          },
+        }
+      );
+      return response.json();
+    }),
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
   }),
+  addComment: publicProcedure
+    .input(
+      z.object({
+        author: z.string(),
+        content: z.string(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      return ctx.prisma.article.create({
+        data: {
+          content: input.content,
+          author: input.author,
+          title: "review"
+        },
+      })
+    }),
 });

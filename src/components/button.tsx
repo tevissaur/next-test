@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 type ButtonProps = {
   href: string;
@@ -8,7 +8,6 @@ type ButtonProps = {
 }
 
 const Button: NextPage<ButtonProps> = ({ href, children }) => {
-
   return (
     <>
         <Link

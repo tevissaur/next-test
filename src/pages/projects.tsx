@@ -13,11 +13,15 @@ const Projects: NextPage = () => {
     isSuccess,
   } = api.example.getProjects.useQuery();
   return (
-    <>
-      {!isLoading && isSuccess && projects
-        ? projects.map((project) => <Card project={project} />)
-        : "Loading!"}
-    </>
+    <div className="flex lg:flex-row flex-col w-full gap-6">
+      <div className="flex min-h-screen w-full flex-col items-center justify-start to-[#15162c] p-6">
+        {!isLoading && isSuccess && projects ? (
+          projects.map((project) => <Card key={project.id} project={project} />)
+        ) : (
+          <> Loading! </>
+        )}
+      </div>
+    </div>
   );
 };
 

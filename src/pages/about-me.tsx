@@ -1,64 +1,66 @@
 import { type NextPage } from "next";
-import { useSession, signOut, signIn } from "next-auth/react";
-import Head from "next/head";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Article from "~/components/article";
-import Card from "~/components/card";
-import Header from "~/components/header";
+import AuthShowcase from "~/components/auth";
+import Comment from "~/components/comment";
+import CommentForm from "~/components/comment-form";
 import { api } from "~/utils/api";
 
 const AboutMe: NextPage = () => {
   const {
-    data: article,
+    data: aboutMeArticle,
     isLoading,
     isError,
     isSuccess,
-  } = api.example.getArticleByTitle.useQuery({ title: "About Me" });
+  } = api.example.getArticlesByTitle.useQuery({ title: "About Me" });
+  const {
+    data: reviews,
+    isLoading: reviewsLoading,
+    isError: reviewsError,
+    isSuccess: reviewsSuccess,
+  } = api.example.getArticlesByTitle.useQuery({ title: "review" });
+  const { data: sessionData } = useSession();
+
+
   return (
-    <>
+    <div className="flex flex-col items-center justify-center gap-20">
       <Image
-        className="m-10 rounded-full"
+        className="rounded-full"
         src="https://via.placeholder.com/640x640"
         alt="this is a placeholder image"
         width={360}
         height={360}
       />
-      {!isLoading && isSuccess && article ? (
-        <Article
-          title={article.title}
-          content={article.content}
-          key={article.id}
-        />
-      ) : (
-        "Loading!"
-      )}
+      {!isLoading && isSuccess && aboutMeArticle
+        ? aboutMeArticle.map((article) => (
+            <Article
+              title={article.title}
+              content={article.content}
+              key={article.id}
+            />
+          ))
+        : "Loading!"}
+
       <AuthShowcase />
-    </>
+      {sessionData && (
+        <>
+          <CommentForm />
+          <div className="flex flex-row flex-wrap justify-center items-center gap-10">
+            {reviewsSuccess && reviews && !reviewsLoading
+              ? reviews.map((review) => (
+                  <Comment
+                    author={review.author}
+                    content={review.content}
+                    key={review.id}
+                  />
+                ))
+              : "Loading!"}
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
 export default AboutMe;
-
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};

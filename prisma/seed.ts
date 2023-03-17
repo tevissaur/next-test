@@ -2,6 +2,7 @@ import { prisma } from "../src/server/db";
 
 async function main() {
   const id = "cl9ebqhxk00003b600tymydho";
+  await prisma.article.deleteMany();
   await prisma.article.create({
     data: {
       title: "About Me",
@@ -9,12 +10,15 @@ async function main() {
       author: "me"
     }
   })
+  await prisma.project.deleteMany();
   await prisma.project.create({
     data: {
       name: "Chicken Running",
       description: "This web app allows a gardener to organize their garden and share information with others through a blogging system.",
       demoUrl: "https://chicken-running.herokuapp.com/",
-      githubUrl: "https://github.com/maxaeon/project-2",
+      owner: "maxaeon",
+      repoName: "project-2",
+      repoUrl: "https://github.com/maxaeon/project-2",
       imageUrl: "https://via.placeholder.com/640x640"
     }
   })
@@ -22,8 +26,10 @@ async function main() {
     data: {
       name: "Fantasy World Wiki",
       description: "This web app allows a gardener to organize their garden and share information with others through a blogging system.",
-      demoUrl: "https://chicken-running.herokuapp.com/",
-      githubUrl: "https://github.com/maxaeon/project-2",
+      demoUrl: "https://tevissaur.github.io/forene-wiki/",
+      owner: "tevissaur",
+      repoName: "forene-wiki",
+      repoUrl: "https://github.com/tevissaur/forene-wiki",
       imageUrl: "https://via.placeholder.com/640x640"
     }
   })
@@ -32,7 +38,9 @@ async function main() {
       name: "Netflix and Grill",
       description: "This web app allows a gardener to organize their garden and share information with others through a blogging system.",
       demoUrl: "https://alexanderleino.github.io/Netflix-and-Grill/",
-      githubUrl: "https://github.com/AlexanderLeino/Netflix-and-Grill",
+      owner: "AlexanderLeino",
+      repoName: "Netflix-and-Grill",
+      repoUrl: "https://github.com/AlexanderLeino/Netflix-and-Grill",
       imageUrl: "https://via.placeholder.com/640x640"
     }
   })
@@ -40,8 +48,21 @@ async function main() {
     data: {
       name: "Local Farmers",
       description: "This web app allows a gardener to organize their garden and share information with others through a blogging system.",
-      demoUrl: "https://chicken-running.herokuapp.com/",
-      githubUrl: "https://github.com/tevissaur/your-local-farmers",
+      demoUrl: "https://your-local-farmers.herokuapp.com/",
+      owner: "tevissaur",
+      repoName: "your-local-farmers",
+      repoUrl: "https://github.com/tevissaur/your-local-farmers",
+      imageUrl: "https://via.placeholder.com/640x640"
+    }
+  })
+  await prisma.project.create({
+    data: {
+      name: "Tic Tac Toe",
+      description: "This web app allows a gardener to organize their garden and share information with others through a blogging system.",
+      demoUrl: "https://tevissaur.github.io/orange-blossom/",
+      owner: "tevissaur",
+      repoName: "orange-blossom",
+      repoUrl: "https://github.com/tevissaur/orange-blossom",
       imageUrl: "https://via.placeholder.com/640x640"
     }
   })

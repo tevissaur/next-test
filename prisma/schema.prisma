@@ -69,8 +69,10 @@ model Project {
     id String @id @default(cuid())
     name String
     description String
-    githubUrl String
+    owner String
+    repoName String
     demoUrl String
+    repoUrl String
     imageUrl String
 }
 
