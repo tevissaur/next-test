@@ -14,11 +14,7 @@ type CardProps = {
 };
 
 const Card: NextPage<CardProps> = ({ project, isExpanded }) => {
-  const { data, isLoading, isError, isSuccess } =
-    api.example.getGithubRepoInfo.useQuery({
-      owner: project?.owner || "",
-      repoName: project?.repoName || "",
-    });
+
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(isExpanded);
   const parent = useRef(null);
@@ -61,7 +57,7 @@ const Card: NextPage<CardProps> = ({ project, isExpanded }) => {
               />
               <div className="flex justify-center gap-4">
                 <Button href={project?.demoUrl || "#"}> Demo </Button>
-                <Button href={data?.html_url || "#"}> Github </Button>{" "}
+                <Button href={project?.repoUrl || "#"}> Github </Button>{" "}
               </div>
             </div>
             <div className="flex max-w-full flex-col items-center gap-4"></div>

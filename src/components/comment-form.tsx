@@ -7,16 +7,16 @@ const CommentForm: React.FC = () => {
   const { data: session } = useSession();
   const mutation = api.example.addComment.useMutation()
 
-  const postComment = async (e: React.FormEvent<HTMLFormElement>) => { 
+  const postComment = (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
     console.log(session)
     if (comment === "") return;
-    await mutation.mutateAsync({ content: comment, author: session?.user.name || "Unknown" })
+    mutation.mutate({ content: comment, author: session?.user.name || "Unknown" })
     setComment("");
   } 
 
   return (
-    <form className="flex flex-col items-center justify-center gap-4 bg-white/10 hover:bg-white/20 rounded-xl px-6 py-4" onSubmit={postComment}>
+    <form className="flex flex-col items-center justify-center gap-4 bg-white/10 hover:bg-white/20 rounded-xl px-6 py-4" onSubmit={(e) => postComment(e)}>
       <label
         htmlFor="message"
         className=" text-3xl font-extrabold tracking-tight text-white"

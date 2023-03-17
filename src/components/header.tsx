@@ -29,7 +29,7 @@ const Header: NextPage = () => {
   }, [parent]);
 
   const showPageHeader = (e: React.MouseEvent) => {
-    let navStatus = navButtons.map((button) => {
+    const navStatus = navButtons.map((button) => {
       return {
         name: button.name,
         active:
@@ -42,7 +42,7 @@ const Header: NextPage = () => {
   return (
     <header className="max-h-min bg-black p-5" ref={parent}>
       <h1 className="mb-7 text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-        Hey, I'm <span className="text-[hsl(280,100%,70%)]">Tevis</span>
+          Hey, I&apos;m <span className="text-[hsl(280,100%,70%)]">Tevis</span>
       </h1>
       <div className="flex justify-center">
         {navButtons.map((item, index) => (
