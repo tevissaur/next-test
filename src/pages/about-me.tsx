@@ -15,10 +15,10 @@ const AboutMe: NextPage = () => {
     isSuccess,
   } = api.example.getArticlesByTitle.useQuery({ title: "About Me" });
   const {
-    data: reviews,
-    isLoading: reviewsLoading,
-    isError: reviewsError,
-    isSuccess: reviewsSuccess,
+    data: comments,
+    isLoading: commentsLoading,
+    isError: commentsError,
+    isSuccess: commentsSuccess,
   } = api.example.getArticlesByTitle.useQuery({ title: "review" });
   const { data: sessionData } = useSession();
 
@@ -46,13 +46,13 @@ const AboutMe: NextPage = () => {
       {sessionData && (
         <>
           <CommentForm />
-          <div className="flex flex-row flex-wrap justify-center items-center gap-10">
-            {reviewsSuccess && reviews && !reviewsLoading
-              ? reviews.map((review) => (
+          <div className="flex flex-row flex-wrap justify-center items-center gap-6">
+            {commentsSuccess && comments && !commentsLoading
+              ? comments.map((comment) => (
                   <Comment
-                    author={review.author}
-                    content={review.content}
-                    key={review.id}
+                    author={comment.author}
+                    content={comment.content}
+                    key={comment.id}
                   />
                 ))
               : "Loading!"}

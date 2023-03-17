@@ -9,6 +9,7 @@ const CommentForm: React.FC = () => {
 
   const postComment = async (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
+    console.log(session)
     if (comment === "") return;
     await mutation.mutateAsync({ content: comment, author: session?.user.name || "Unknown" })
     setComment("");

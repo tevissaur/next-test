@@ -16,7 +16,7 @@ const Header: NextPage = () => {
     },
     {
       name: "About Me",
-      active: false,
+      active: true,
     },
     {
       name: "Projects",
@@ -24,7 +24,6 @@ const Header: NextPage = () => {
     },
   ]);
   const parent = useRef(null);
-
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
@@ -80,4 +79,3 @@ const Header: NextPage = () => {
 };
 
 export default Header;
-
