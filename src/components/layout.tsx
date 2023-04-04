@@ -17,7 +17,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-start bg-gradient-to-b from-[#2e026d] to-[#15162c] p-6">
+      <main className="flex min-h-screen flex-col items-center justify-start bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         {children}
       </main>
       <Footer />

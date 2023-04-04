@@ -9,7 +9,6 @@ const CommentForm: React.FC = () => {
 
   const postComment = (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
-    console.log(session)
     if (comment === "") return;
     mutation.mutate({ content: comment, author: session?.user.name || "Unknown" })
     setComment("");

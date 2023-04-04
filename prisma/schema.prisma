@@ -80,7 +80,7 @@ model Project {
 model Article {
     id String @id @default(cuid())
     title String
-    content String
+    content String @db.VarChar(10000)
     author String
 }
 

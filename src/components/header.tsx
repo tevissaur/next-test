@@ -11,12 +11,12 @@ import PageTitle from "./page-title";
 const Header: NextPage = () => {
   const [navButtons, setNavButtons] = useState([
     {
-      name: "Skills",
-      active: false,
-    },
-    {
       name: "About Me",
       active: true,
+    },
+    {
+      name: "Services",
+      active: false,
     },
     {
       name: "Projects",
@@ -42,7 +42,7 @@ const Header: NextPage = () => {
   return (
     <header className="max-h-min bg-black p-5" ref={parent}>
       <h1 className="mb-7 text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Hey, I&apos;m <span className="text-[hsl(280,100%,70%)]">Tevis</span>
+        Hey, I&apos;m <span className="text-[hsl(280,100%,70%)]">Tevis</span>
       </h1>
       <div className="flex justify-center">
         {navButtons.map((item, index) => (
@@ -58,14 +58,14 @@ const Header: NextPage = () => {
       </div>
       {navButtons[0]?.active && (
         <PageTitle>
-          <>These are my </>
-          <span className="text-[hsl(280,100%,70%)]">Skills</span>
+          <>A little </>
+          <span className="text-[hsl(280,100%,70%)]">About Me</span>
         </PageTitle>
       )}
       {navButtons[1]?.active && (
         <PageTitle>
-          <>A little </>
-          <span className="text-[hsl(280,100%,70%)]">About Me</span>
+          <span className="text-[hsl(280,100%,70%)]">Services</span>
+          <> I Offer</>
         </PageTitle>
       )}
       {navButtons[2]?.active && (

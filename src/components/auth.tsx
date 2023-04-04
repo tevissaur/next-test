@@ -6,24 +6,18 @@ import CommentForm from "./comment-form";
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <p className="text-center text-2xl text-white">
         {!sessionData && (
           <>
-            Sign In to leave a note
+            Sign in to leave a note
           </>
         )}
         {sessionData && (
           <>
             <Image
-              className="rounded-full"
               width={100}
               height={100}
               src={sessionData.user?.image || ""}
@@ -32,7 +26,6 @@ const AuthShowcase: React.FC = () => {
             <span>Logged in as {sessionData.user?.name}</span>
           </>
         )}
-        {secretMessage && <span> - {secretMessage}</span>}
       </p>
 
       <button
