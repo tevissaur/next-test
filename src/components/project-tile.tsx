@@ -29,36 +29,36 @@ const ProjectTile: NextPage<ProjectProps> = ({ project, isExpanded }) => {
           : "opacity-40"
       }`}
     >
-      <VisibilitySensor
-        onChange={(isVisible: boolean | ((prevState: boolean) => boolean)) =>
-          setVisible(isVisible)
-        }
-      >
-        <div className="item-center z-10 flex w-full flex-col justify-between rounded-lg border-2 border-[#233329] bg-[#4D4730] p-6 text-white/90 shadow-2xl sm:items-start md:w-2/5 lg:w-1/4">
+      <div className="item-center z-10 flex w-full flex-col justify-between rounded-lg border-2 border-[#233329] bg-[#4D4730] p-6 text-white/90 shadow-2xl sm:items-start md:w-2/5 lg:w-1/4">
+        <VisibilitySensor
+          onChange={(isVisible: boolean | ((prevState: boolean) => boolean)) =>
+            setVisible(isVisible)
+          }
+        >
           <div className="flex h-min flex-col justify-start gap-10 rounded-lg p-3">
             <h3 className="z-10 text-left text-3xl font-bold">
               {project?.name}
             </h3>
             <div className="text-lg">{project?.description}</div>
           </div>
+        </VisibilitySensor>
 
-          <div className="flex h-min flex-col justify-start gap-5 rounded-lg p-3">
-            <h3 className="z-10 text-left text-3xl font-bold">Tech Stack</h3>
-            <div className="text-lg">Icons go here</div>
-          </div>
-
-          <div className="flex max-h-min justify-start gap-3">
-            <ProjectTileButton href={project?.demoUrl || "#"}>
-              {" "}
-              Demo{" "}
-            </ProjectTileButton>
-            <ProjectTileButton href={project?.repoUrl || "#"}>
-              {" "}
-              Github{" "}
-            </ProjectTileButton>
-          </div>
+        <div className="flex h-min flex-col justify-start gap-5 rounded-lg p-3">
+          <h3 className="z-10 text-left text-3xl font-bold">Tech Stack</h3>
+          <div className="text-lg">Icons go here</div>
         </div>
-      </VisibilitySensor>
+
+        <div className="flex max-h-min justify-start gap-3">
+          <ProjectTileButton href={project?.demoUrl || "#"}>
+            {" "}
+            Demo{" "}
+          </ProjectTileButton>
+          <ProjectTileButton href={project?.repoUrl || "#"}>
+            {" "}
+            Github{" "}
+          </ProjectTileButton>
+        </div>
+      </div>
       <Image
         className={`z-0 object-cover transition-all duration-300`}
         src={project?.imageUrl || ""}
