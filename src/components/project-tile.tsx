@@ -22,17 +22,19 @@ const ProjectTile: NextPage<ProjectProps> = ({ project, isExpanded }) => {
   }, [parent]);
 
   return (
-    <VisibilitySensor
-      onChange={(isVisible: boolean | ((prevState: boolean) => boolean)) =>
-        setVisible(isVisible)
-      }
+    <div
+      className={`duration-50 project-tile relative flex h-max w-full flex-col justify-between gap-4 overflow-hidden border-b-2 border-black p-6 text-white transition-all ease-in ${
+        visible
+          ? "opacity-100 sm:opacity-90 sm:hover:opacity-100"
+          : "opacity-40"
+      }`}
     >
-      <div
-        className={`duration-50 project-tile relative flex h-max w-full flex-col justify-between gap-4 overflow-hidden border-b-2 border-black text-white transition-all ease-in p-6 ${
-          visible ? "opacity-100 sm:opacity-90 sm:hover:opacity-100" : "opacity-40"
-        }`}
+      <VisibilitySensor
+        onChange={(isVisible: boolean | ((prevState: boolean) => boolean)) =>
+          setVisible(isVisible)
+        }
       >
-        <div className="flex flex-col justify-between item-center sm:items-start bg-[#4D4730] border-2 border-[#233329] w-full md:w-2/5 lg:w-1/4 z-10 p-6 rounded-lg text-white/90 shadow-2xl">
+        <div className="item-center z-10 flex w-full flex-col justify-between rounded-lg border-2 border-[#233329] bg-[#4D4730] p-6 text-white/90 shadow-2xl sm:items-start md:w-2/5 lg:w-1/4">
           <div className="flex h-min flex-col justify-start gap-10 rounded-lg p-3">
             <h3 className="z-10 text-left text-3xl font-bold">
               {project?.name}
@@ -56,14 +58,14 @@ const ProjectTile: NextPage<ProjectProps> = ({ project, isExpanded }) => {
             </ProjectTileButton>
           </div>
         </div>
-        <Image
-          className={`z-0 object-cover transition-all duration-300`}
-          src={project?.imageUrl || ""}
-          alt={"Snapshot of the application."}
-          fill
-        />
-      </div>
-    </VisibilitySensor>
+      </VisibilitySensor>
+      <Image
+        className={`z-0 object-cover transition-all duration-300`}
+        src={project?.imageUrl || ""}
+        alt={"Snapshot of the application."}
+        fill
+      />
+    </div>
   );
 };
 
