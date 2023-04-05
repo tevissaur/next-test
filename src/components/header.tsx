@@ -42,7 +42,7 @@ const Header: NextPage = () => {
   return (
     <header className="max-h-min bg-black p-5" ref={parent}>
       <h1 className="mb-7 text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-        Hey, I&apos;m <span className="text-[hsl(280,100%,70%)]">Tevis</span>
+        Hey, I&apos;m <span className="text-[#42F2F7]">Tevis</span>
       </h1>
       <div className="flex justify-center">
         {navButtons.map((item, index) => (
@@ -59,19 +59,19 @@ const Header: NextPage = () => {
       {navButtons[0]?.active && (
         <PageTitle>
           <>A little </>
-          <span className="text-[hsl(280,100%,70%)]">About Me</span>
+          <span className="text-[#42F2F7]">About Me</span>
         </PageTitle>
       )}
       {navButtons[1]?.active && (
         <PageTitle>
-          <span className="text-[hsl(280,100%,70%)]">Services</span>
+          <span className="text-[#42F2F7]">Services</span>
           <> I Offer</>
         </PageTitle>
       )}
       {navButtons[2]?.active && (
         <PageTitle>
           <>Some of my </>
-          <span className="text-[hsl(280,100%,70%)]">Projects</span>
+          <span className="text-[#42F2F7]">Projects</span>
         </PageTitle>
       )}
     </header>

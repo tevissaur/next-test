@@ -28,11 +28,11 @@ const ProjectTile: NextPage<ProjectProps> = ({ project, isExpanded }) => {
       }
     >
       <div
-        className={`duration-50 project-tile relative flex h-max w-full flex-col justify-between gap-4 overflow-hidden border-b-2 border-black text-white transition-all ease-in ${
-          visible ? "opacity-80 hover:opacity-100" : "opacity-40"
+        className={`duration-50 project-tile relative flex h-max w-full flex-col justify-between gap-4 overflow-hidden border-b-2 border-black text-white transition-all ease-in p-6 ${
+          visible ? "opacity-100 sm:opacity-90 sm:hover:opacity-100" : "opacity-40"
         }`}
       >
-        <div className="flex flex-col justify-between items-start bg-white/90 w-1/4 z-10 m-6 p-6 rounded-lg text-black">
+        <div className="flex flex-col justify-between item-center sm:items-start bg-[#4D4730] border-2 border-[#233329] w-full md:w-2/5 lg:w-1/4 z-10 p-6 rounded-lg text-white/90 shadow-2xl">
           <div className="flex h-min flex-col justify-start gap-10 rounded-lg p-3">
             <h3 className="z-10 text-left text-3xl font-bold">
               {project?.name}
@@ -57,7 +57,7 @@ const ProjectTile: NextPage<ProjectProps> = ({ project, isExpanded }) => {
           </div>
         </div>
         <Image
-          className={`z-0 object-cover transition-all duration-300 opacity-70`}
+          className={`z-0 object-cover transition-all duration-300`}
           src={project?.imageUrl || ""}
           alt={"Snapshot of the application."}
           fill

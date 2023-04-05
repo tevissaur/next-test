@@ -10,3 +10,18 @@
 .project-tile:hover > img {
     transform: scale(1.1);
 }
+
+@keyframes loading-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading > svg {
+    animation-name: loading-spinner;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}

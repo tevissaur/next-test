@@ -1,11 +1,7 @@
 import { type NextPage } from "next";
-import Head from "next/head";
-import Article from "~/components/article";
-import Card from "~/components/card";
-import Header from "~/components/header";
-import Loading from "~/components/loading";
 import ProjectTile from "~/components/project-tile";
 import { api } from "~/utils/api";
+import Alert from "~/components/alert";
 
 const Projects: NextPage = () => {
   const {
@@ -13,15 +9,16 @@ const Projects: NextPage = () => {
     isLoading,
     isError,
     isSuccess,
+    error
   } = api.example.getProjects.useQuery();
   return (
     <div className="flex w-full flex-col gap-0">
-      {isLoading && <Loading />}
+      {isLoading && <Alert loading variant="warning" />}
       {(isSuccess && projects) &&
         projects.map((project) => (
           <ProjectTile key={project.id} project={project} />
         ))}
-      {isError && <p>Error</p>}
+      {isError && <Alert error={error.message} variant="error" />}
     </div>
   );
 };

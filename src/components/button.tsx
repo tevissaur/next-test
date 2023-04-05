@@ -12,7 +12,7 @@ const Button: NextPage<ButtonProps> = ({ href, children, className }) => {
   return (
     <>
       <Link
-        className={`${className} max-w-max transition-all duration-200`}
+        className={`${className || ""} max-w-max transition-all duration-200`}
         href={href}
         target="_blank"
       >
@@ -27,11 +27,10 @@ export default Button;
 export const DefaultStyleButton: NextPage<ButtonProps> = ({
   href,
   children,
-  className,
 }) => {
   return (
     <Button
-      className={`text-white rounded-md text-lg px-4 py-2 mx-4 bg-white/30 hover:bg-white/60`}
+      className={`text-white rounded-md text-lg px-4 py-2 mx-4 bg-[#233329]/60 hover:bg-black/70`}
       href={href}
     >
       {children}
@@ -41,11 +40,10 @@ export const DefaultStyleButton: NextPage<ButtonProps> = ({
 export const ProjectTileButton: NextPage<ButtonProps> = ({
   href,
   children,
-  className,
 }) => {
   return (
     <Button
-      className={`text-white text-lg rounded-lg bg-black/60 hover:bg-black/90 px-4 py-2`}
+      className={`text-white text-lg rounded-lg bg-[#498C8A]/90 hover:bg-[#46ACC2]/90 px-4 py-2`}
       href={href}
     >
       {children}
