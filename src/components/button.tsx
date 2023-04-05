@@ -30,7 +30,7 @@ export const DefaultStyleButton: NextPage<ButtonProps> = ({
 }) => {
   return (
     <Button
-      className={`text-white rounded-md text-lg px-4 py-2 mx-4 bg-[#233329]/60 hover:bg-black/70`}
+      className={`text-white rounded-md text-lg px-4 py-2 mx-4 bg-[#233329]/60 hover:bg-[#242625]/90`}
       href={href}
     >
       {children}
