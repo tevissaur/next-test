@@ -1,7 +1,5 @@
 import { useSession, signOut, signIn } from "next-auth/react";
 import Image from "next/image";
-import { api } from "~/utils/api";
-import CommentForm from "./comment-form";
 
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();

@@ -34,7 +34,7 @@ const AboutMe: NextPage = () => {
     setComments(commentsData);
   }, [commentsData]);
 
-  const postComment = async (e: React.FormEvent<HTMLFormElement>) => {
+  const postComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment === "") return;
     mutation.mutate({
@@ -42,8 +42,10 @@ const AboutMe: NextPage = () => {
       author: sessionData?.user.name || "Unknown",
     });
     setComment("");
-    const { data, isSuccess } = await refetch();
-    isSuccess ? setComments(data) : null;
+    (async () => {
+      const { data, isSuccess } = await refetch();
+      isSuccess ? setComments(data) : null;
+    })
   };
 
   return (
