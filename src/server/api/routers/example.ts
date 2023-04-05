@@ -25,6 +25,9 @@ export const exampleRouter = createTRPCRouter({
   getProjects: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.project.findMany();
   }),
+  getServices: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.service.findMany();
+  }),
   getArticlesByTitle: publicProcedure
     .input(z.object({ title: z.string() }))
     .query(({ input, ctx }) => {

@@ -40,14 +40,14 @@ const Header: NextPage = () => {
   };
 
   return (
-    <header className="max-h-min bg-black p-5" ref={parent}>
+    <header className="max-h-min bg-[#242625] p-5" ref={parent}>
       <h1 className="mb-7 text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
         Hey, I&apos;m <span className="text-[#42F2F7]">Tevis</span>
       </h1>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-4">
         {navButtons.map((item, index) => (
           <Link
-            className="mx-4 max-w-max rounded-md bg-white/10 px-4 py-2 text-lg text-white hover:bg-white/20"
+            className="min-w-max rounded-md bg-[#498C8A]/40 px-4 py-2 text-lg text-white hover:bg-[#498C8A]/90 hover:shadow-xl hover:shadow-[#D47C79]/20"
             href={`/${slugify(item.name, { lower: true })}`}
             key={index}
             onClick={showPageHeader}
@@ -59,19 +59,19 @@ const Header: NextPage = () => {
       {navButtons[0]?.active && (
         <PageTitle>
           <>A little </>
-          <span className="text-[#42F2F7]">About Me</span>
+          <span className="text-[#D47C79]">About Me</span>
         </PageTitle>
       )}
       {navButtons[1]?.active && (
         <PageTitle>
-          <span className="text-[#42F2F7]">Services</span>
+          <span className="text-[#D47C79]">Services</span>
           <> I Offer</>
         </PageTitle>
       )}
       {navButtons[2]?.active && (
         <PageTitle>
           <>Some of my </>
-          <span className="text-[#42F2F7]">Projects</span>
+          <span className="text-[#D47C79]">Projects</span>
         </PageTitle>
       )}
     </header>

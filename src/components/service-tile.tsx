@@ -1,16 +1,14 @@
 import { type NextPage } from "next";
 import VisibilitySensor from "react-visibility-sensor";
-import Image from "next/image";
-import { Project } from "@prisma/client";
-import { ProjectTileButton } from "./button";
+import { Service } from "@prisma/client";
 import { useState } from "react";
 
-type ProjectProps = {
-  project?: Project;
+type ServiceProps = {
+  service?: Service;
   isExpanded?: boolean;
 };
 
-const ProjectTile: NextPage<ProjectProps> = ({ project }) => {
+const ServiceTile: NextPage<ServiceProps> = ({ service }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -29,9 +27,9 @@ const ProjectTile: NextPage<ProjectProps> = ({ project }) => {
         >
           <div className="flex h-min flex-col justify-start gap-10 rounded-lg p-3">
             <h3 className="z-10 text-left text-3xl font-bold">
-              {project?.name}
+              {service?.name}
             </h3>
-            <div className="text-lg">{project?.description}</div>
+            <div className="text-lg">{service?.description}</div>
           </div>
         </VisibilitySensor>
 
@@ -39,26 +37,9 @@ const ProjectTile: NextPage<ProjectProps> = ({ project }) => {
           <h3 className="z-10 text-left text-3xl font-bold">Tech Stack</h3>
           <div className="text-lg">Icons go here</div>
         </div>
-
-        <div className="flex max-h-min justify-start gap-3">
-          <ProjectTileButton href={project?.demoUrl || "#"}>
-            {" "}
-            Demo{" "}
-          </ProjectTileButton>
-          <ProjectTileButton href={project?.repoUrl || "#"}>
-            {" "}
-            Github{" "}
-          </ProjectTileButton>
-        </div>
       </div>
-      <Image
-        className={`z-0 object-cover transition-all duration-300`}
-        src={project?.imageUrl || ""}
-        alt={"Snapshot of the application."}
-        fill
-      />
     </div>
   );
 };
 
-export default ProjectTile;
+export default ServiceTile;

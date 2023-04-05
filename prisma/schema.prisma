@@ -76,6 +76,11 @@ model Project {
     repoUrl String
     imageUrl String
 }
+model Service {
+    id String @id @default(cuid())
+    name String
+    description String
+}
 
 model Article {
     id String @id @default(cuid())
