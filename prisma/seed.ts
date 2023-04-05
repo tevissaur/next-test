@@ -71,6 +71,21 @@ async function main() {
       imageUrl: "/ttt.png",
     },
   });
+  await prisma.service.deleteMany();
+  await prisma.service.create({
+    data: {
+      name: "Web Development",
+      description:
+        "Need a custom website to showcase your business? Look no further!",
+    },
+  });
+  await prisma.service.create({
+    data: {
+      name: "Web Design",
+      description:
+        "I can help improve your website design and user experience.",
+    },
+  });
 }
 
 main()

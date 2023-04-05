@@ -5,10 +5,9 @@ import Article from "~/components/article";
 import AuthShowcase from "~/components/auth";
 import { DefaultStyleButton } from "~/components/button";
 import Comment from "~/components/comment";
-import CommentForm from "~/components/comment-form";
-import Loading from "~/components/alert";
 import { api } from "~/utils/api";
 import Alert from "~/components/alert";
+import { useEffect, useState } from "react";
 
 const AboutMe: NextPage = () => {
   const {
@@ -19,16 +18,36 @@ const AboutMe: NextPage = () => {
     error,
   } = api.example.getArticlesByTitle.useQuery({ title: "About Me" });
   const {
-    data: comments,
+    data: commentsData,
     isLoading: commentsLoading,
     isError: commentsIsError,
     isSuccess: commentsIsSuccess,
     error: commentsError,
+    refetch,
   } = api.example.getArticlesByTitle.useQuery({ title: "review" });
   const { data: sessionData } = useSession();
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState(commentsData);
+  const mutation = api.example.addComment.useMutation();
+
+  useEffect(() => {
+    setComments(commentsData);
+  }, [commentsData]);
+
+  const postComment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (comment === "") return;
+    mutation.mutate({
+      content: comment,
+      author: sessionData?.user.name || "Unknown",
+    });
+    setComment("");
+    const { data, isSuccess } = await refetch();
+    isSuccess ? setComments(data) : null;
+  };
 
   return (
-    <div className="mt-10 flex flex-col items-center justify-center gap-20 w-full sm:w-1/2">
+    <div className="mt-10 flex w-full flex-col items-center justify-center gap-10 p-5">
       <Image
         className="rounded-full"
         src="https://avatars.githubusercontent.com/u/65460369?s=400&u=5d8067fcf2e854dba1e991ab49be147da697114c&v=4"
@@ -36,18 +55,18 @@ const AboutMe: NextPage = () => {
         width={360}
         height={360}
       />
-        {isLoading && <Alert loading variant="warning" />}
-        {isError && <Alert error={error.message} variant="error" />}
-        {!isLoading &&
-          isSuccess &&
-          aboutMeArticle &&
-          aboutMeArticle.map((article) => (
-            <Article
-              title={article.title}
-              content={article.content}
-              key={article.id}
-            />
-          ))}
+      {isLoading && <Alert loading variant="warning" />}
+      {isError && <Alert error={error.message} variant="error" />}
+      {!isLoading &&
+        isSuccess &&
+        aboutMeArticle &&
+        aboutMeArticle.map((article) => (
+          <Article
+            title={article.title}
+            content={article.content}
+            key={article.id}
+          />
+        ))}
       <div className="flex flex-row items-center justify-center gap-20">
         <DefaultStyleButton
           href={"https://www.linkedin.com/in/tevis-r-34014147/"}
@@ -62,16 +81,39 @@ const AboutMe: NextPage = () => {
       </div>
       <AuthShowcase />
       {sessionData && (
-        <>
-          <CommentForm />
-          <div className="flex w-full flex-row flex-wrap items-center justify-center gap-6">
-            {commentsLoading && (
-              <Alert loading variant="primary" />
-            )}
+        <div className="flex w-full flex-col gap-5 md:w-3/5 lg:w-4/6 items-center">
+          <form
+            className="max-w-screen flex flex-col items-center justify-center gap-4 rounded-xl bg-white/10 px-6 py-4 w-full lg:w-3/5"
+            onSubmit={(e) => postComment(e)}
+          >
+            <label
+              htmlFor="message"
+              className=" text-3xl font-extrabold tracking-tight text-white"
+            >
+              Send me a note!
+            </label>
+            <textarea
+              className="w-full rounded-lg border-2 border-black bg-black/40 p-1 text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 hover:bg-black/100 focus:bg-black/100 sm:text-3xl md:font-extrabold"
+              name="message"
+              id="message"
+              rows={10}
+              value={comment}
+              placeholder="This is a cool site!"
+              onChange={(e) => setComment(e.currentTarget.value)}
+            />
+
+            <button
+              type="submit"
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+            >
+              Send!
+            </button>
+          </form>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-6">
+            {commentsLoading && <Alert loading variant="primary" />}
             {commentsIsError && (
               <Alert error={commentsError.message} variant="error" />
             )}
-
             {commentsIsSuccess &&
               comments &&
               !commentsLoading &&
@@ -83,7 +125,7 @@ const AboutMe: NextPage = () => {
                 />
               ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
