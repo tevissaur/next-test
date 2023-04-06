@@ -66,7 +66,7 @@ export const exampleRouter = createTRPCRouter({
         content: z.string(),
       })
     )
-    .mutation(async ({ input, ctx }) => {
+    .mutation(({ input, ctx }) => {
       return ctx.prisma.article.create({
         data: {
           content: input.content,

@@ -77,6 +77,7 @@ async function main() {
       name: "Web Development",
       description:
         "Need a custom website to showcase your business? Look no further!",
+        imageUrl: "/web-dev.jpg",
     },
   });
   await prisma.service.create({
@@ -84,6 +85,15 @@ async function main() {
       name: "Web Design",
       description:
         "I can help improve your website design and user experience.",
+        imageUrl: "/web-dev.jpg",
+    },
+  });
+  await prisma.service.create({
+    data: {
+      name: "Website Maintenance",
+      description:
+        "I can help maintain your existing websites as well as make it easier for others to find your website.",
+        imageUrl: "/web-dev.jpg",
     },
   });
 }

@@ -12,7 +12,7 @@ const Button: NextPage<ButtonProps> = ({ href, children, className }) => {
   return (
     <>
       <Link
-        className={`${className || ""} max-w-max transition-all duration-200`}
+        className={`${className || ""} max-w-max transition-all duration-200 shadow-xl`}
         href={href}
         target="_blank"
       >

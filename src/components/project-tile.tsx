@@ -52,7 +52,7 @@ const ProjectTile: NextPage<ProjectProps> = ({ project }) => {
         </div>
       </div>
       <Image
-        className={`z-0 object-cover transition-all duration-300`}
+        className={`z-0 object-cover transition-all duration-300 opacity-80`}
         src={project?.imageUrl || ""}
         alt={"Snapshot of the application."}
         fill

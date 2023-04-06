@@ -80,6 +80,7 @@ model Service {
     id String @id @default(cuid())
     name String
     description String
+    imageUrl String
 }
 
 model Article {
