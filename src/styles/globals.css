@@ -4,8 +4,7 @@
 
 
 .project-tile {
-    height: 600px;
-    min-height: min-content;
+    min-height: max-content;
 }
 .project-tile:hover > img {
     transform: scale(1.1);
