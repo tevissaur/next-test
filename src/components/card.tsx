@@ -19,10 +19,6 @@ const Card: NextPage<CardProps> = ({ project, isExpanded }) => {
   const [expanded, setExpanded] = useState(isExpanded);
   const parent = useRef(null);
 
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current);
-  }, [parent]);
-
   const expand = () => setExpanded(!expanded);
 
   return (

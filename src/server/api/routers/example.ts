@@ -56,6 +56,24 @@ export const exampleRouter = createTRPCRouter({
       );
       return response.json();
     }),
+  getGithubRepoContributorsInfo: publicProcedure
+    .input(z.object({ repoName: z.string(), owner: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const response = await fetch(
+        `${githubApiUrl}/repos/${input.owner}/${input.repoName}/contributors`,
+        {
+          headers: {
+            Authorization: `token ${process.env.GITHUB_TOKEN || ""}`,
+          },
+        }
+      );
+      const data = await response.json() as Array<{
+        login: string;
+        avatar_url: string;
+        html_url: string;
+      }>;
+      return data;
+    }),
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
   }),
@@ -66,13 +84,13 @@ export const exampleRouter = createTRPCRouter({
         content: z.string(),
       })
     )
-    .mutation(async ({ input, ctx }) => {
+    .mutation(({ input, ctx }) => {
       return ctx.prisma.article.create({
         data: {
           content: input.content,
           author: input.author,
-          title: "review"
+          title: "review",
         },
-      })
+      });
     }),
 });

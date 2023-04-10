@@ -69,17 +69,19 @@ model VerificationToken {
 model Project {
     id String @id @default(cuid())
     name String
-    description String
+    description String @db.VarChar(10000)
     owner String
     repoName String
     demoUrl String
     repoUrl String
     imageUrl String
+    technologies String
 }
 model Service {
     id String @id @default(cuid())
     name String
     description String
+    imageUrl String
 }
 
 model Article {

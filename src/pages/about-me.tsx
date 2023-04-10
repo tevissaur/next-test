@@ -23,35 +23,36 @@ const AboutMe: NextPage = () => {
     isError: commentsIsError,
     isSuccess: commentsIsSuccess,
     error: commentsError,
-    refetch,
   } = api.example.getArticlesByTitle.useQuery({ title: "review" });
   const { data: sessionData } = useSession();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState(commentsData);
-  const mutation = api.example.addComment.useMutation();
+  const { 
+    error: addCommentError, 
+    isError: addCommentIsError, 
+    isSuccess: addCommentisSuccess,
+    mutate: addComment,
+    data: addCommentData,
+  } = api.example.addComment.useMutation();
 
   useEffect(() => {
-    setComments(commentsData);
-  }, [commentsData]);
+    if (commentsIsSuccess) setComments(commentsData);
+  }, [commentsData, commentsIsSuccess]);
 
   const postComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment === "") return;
-    mutation.mutate({
+    addComment({
       content: comment,
       author: sessionData?.user.name || "Unknown",
     });
     setComment("");
-    (async () => {
-      const { data, isSuccess } = await refetch();
-      isSuccess ? setComments(data) : null;
-    })
   };
 
   return (
-    <div className="mt-10 flex w-full flex-col items-center justify-center gap-10 p-5">
+    <div className="flex w-full flex-col items-center justify-center gap-10 p-5 py-10 md:w-3/4 lg:w-7/12 xl:w-1/2 2xl:w-1/4">
       <Image
-        className="rounded-full"
+        className="rounded-full shadow-xl"
         src="https://avatars.githubusercontent.com/u/65460369?s=400&u=5d8067fcf2e854dba1e991ab49be147da697114c&v=4"
         alt="this is a placeholder image"
         width={360}
@@ -69,7 +70,7 @@ const AboutMe: NextPage = () => {
             key={article.id}
           />
         ))}
-      <div className="flex flex-row items-center justify-center gap-20">
+      <div className="flex flex-row items-center justify-center gap-20 ">
         <DefaultStyleButton
           href={"https://www.linkedin.com/in/tevis-r-34014147/"}
         >
@@ -83,9 +84,9 @@ const AboutMe: NextPage = () => {
       </div>
       <AuthShowcase />
       {sessionData && (
-        <div className="flex w-full flex-col gap-5 md:w-3/5 lg:w-4/6 items-center">
+        <div className="flex flex-col items-center gap-5">
           <form
-            className="max-w-screen flex flex-col items-center justify-center gap-4 rounded-xl bg-white/10 px-6 py-4 w-full lg:w-3/5"
+            className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-white/20 px-6 py-4"
             onSubmit={(e) => postComment(e)}
           >
             <label
@@ -95,7 +96,7 @@ const AboutMe: NextPage = () => {
               Send me a note!
             </label>
             <textarea
-              className="w-full rounded-lg border-2 border-black bg-black/40 p-1 text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 hover:bg-black/100 focus:bg-black/100 sm:text-3xl md:font-extrabold"
+              className="w-full rounded-lg border-2 border-black bg-black/40 p-2 text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 hover:bg-black/80 focus:bg-black/80 sm:text-3xl md:font-extrabold"
               name="message"
               id="message"
               rows={10}
@@ -106,14 +107,14 @@ const AboutMe: NextPage = () => {
 
             <button
               type="submit"
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+              className="rounded-full bg-white/20 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/40 hover:shadow-lg"
             >
               Send!
             </button>
           </form>
-          <div className="flex flex-row flex-wrap items-center justify-center gap-6">
+          <div className="flex flex-row flex-wrap items-around justify-around gap-4">
             {commentsLoading && <Alert loading variant="primary" />}
-            {commentsIsError && (
+            {(commentsIsError) && (
               <Alert error={commentsError.message} variant="error" />
             )}
             {commentsIsSuccess &&
