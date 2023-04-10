@@ -17,3 +17,14 @@ export const typescriptLogo = "/Typescript_logo_2020.svg"
 export const mySqlLogo = "/MySQL_textlogo.svg"
 
 export const nextJsLogo = "/Nextjs-logo.svg"
+
+export const skillLogos = {
+    ["CSS"]: cssLogo,
+    ["HTML"]: htmlLogo,
+    ["JavaScript"]: jsLogo,
+    ["React"]: reactLogo,
+    ["MySQL"]: mySqlLogo,
+    ["Typescript"]: typescriptLogo,
+    ["Node.js"]: nodeLogo,
+    ["Next.js"]: nextJsLogo,
+}

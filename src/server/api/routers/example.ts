@@ -67,8 +67,12 @@ export const exampleRouter = createTRPCRouter({
           },
         }
       );
-
-      return response.json();
+      const data = await response.json() as Array<{
+        login: string;
+        avatar_url: string;
+        html_url: string;
+      }>;
+      return data;
     }),
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";

@@ -21,7 +21,7 @@ async function main() {
       repoName: "project-2",
       repoUrl: "https://github.com/maxaeon/project-2",
       imageUrl: "/chicken-running.png",
-      technologies: ["Handlebars.js", "Express", "MySQL", "Sequelize"].join(','),
+      technologies: ["HTML", "CSS", "JavaScript", "Handlebars.js", "Express", "MySQL", "Sequelize"].join(','),
     },
   });
   await prisma.project.create({
@@ -60,7 +60,7 @@ async function main() {
       repoName: "your-local-farmers",
       repoUrl: "https://github.com/tevissaur/your-local-farmers",
       imageUrl: "/local-farmers.png",
-      technologies: ["Node.js", "Express", "MongoDB", "React", "Redux", "Material UI"].join(','),
+      technologies: ["Node.js", "Express", "MongoDB", "React", "Redux", "Material UI", "JavaScript"].join(','),
     },
   });
   await prisma.project.create({
@@ -73,7 +73,7 @@ async function main() {
       repoName: "orange-blossom",
       repoUrl: "https://github.com/tevissaur/orange-blossom",
       imageUrl: "/ttt.png",
-      technologies: ["HTML", "CSS3", "JavaScript"].join(','),
+      technologies: ["HTML", "CSS", "JavaScript"].join(','),
     },
   });
   await prisma.service.deleteMany();
