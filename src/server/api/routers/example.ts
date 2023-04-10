@@ -56,6 +56,20 @@ export const exampleRouter = createTRPCRouter({
       );
       return response.json();
     }),
+  getGithubRepoContributorsInfo: publicProcedure
+    .input(z.object({ repoName: z.string(), owner: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const response = await fetch(
+        `${githubApiUrl}/repos/${input.owner}/${input.repoName}/contributors`,
+        {
+          headers: {
+            Authorization: `token ${process.env.GITHUB_TOKEN || ""}`,
+          },
+        }
+      );
+
+      return response.json();
+    }),
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
   }),
@@ -71,8 +85,8 @@ export const exampleRouter = createTRPCRouter({
         data: {
           content: input.content,
           author: input.author,
-          title: "review"
+          title: "review",
         },
-      })
+      });
     }),
 });

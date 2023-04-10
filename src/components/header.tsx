@@ -1,11 +1,8 @@
 import autoAnimate from "@formkit/auto-animate";
-import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { type NextPage } from "next"
 import Link from "next/link";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import slugify from "slugify";
-
-import { api } from "~/utils/api";
 import PageTitle from "./page-title";
 
 const Header: NextPage = () => {

@@ -23,38 +23,34 @@ const AboutMe: NextPage = () => {
     isError: commentsIsError,
     isSuccess: commentsIsSuccess,
     error: commentsError,
-    refetch,
-    isRefetching,
   } = api.example.getArticlesByTitle.useQuery({ title: "review" });
   const { data: sessionData } = useSession();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState(commentsData);
-  const { mutate } = api.example.addComment.useMutation();
+  const { 
+    error: addCommentError, 
+    isError: addCommentIsError, 
+    isSuccess: addCommentisSuccess,
+    mutate: addComment,
+    data: addCommentData,
+  } = api.example.addComment.useMutation();
 
   useEffect(() => {
-    setComments(commentsData);
-  }, [commentsData]);
-
-  useEffect(() => {
-    if (commentsIsSuccess) {
-      console.log(commentsData)
-      setComments(commentsData);
-    };
-  }, [isRefetching, commentsIsSuccess])
+    if (commentsIsSuccess) setComments(commentsData);
+  }, [commentsData, commentsIsSuccess]);
 
   const postComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment === "") return;
-    mutate({
+    addComment({
       content: comment,
       author: sessionData?.user.name || "Unknown",
-    })
+    });
     setComment("");
-    refetch();
   };
 
   return (
-    <div className="flex flex-col w-full md:w-3/4 lg:w-7/12 xl:w-1/2 2xl:w-1/4 items-center justify-center gap-10 p-5 py-10">
+    <div className="flex w-full flex-col items-center justify-center gap-10 p-5 py-10 md:w-3/4 lg:w-7/12 xl:w-1/2 2xl:w-1/4">
       <Image
         className="rounded-full shadow-xl"
         src="https://avatars.githubusercontent.com/u/65460369?s=400&u=5d8067fcf2e854dba1e991ab49be147da697114c&v=4"
@@ -116,9 +112,9 @@ const AboutMe: NextPage = () => {
               Send!
             </button>
           </form>
-          <div className="flex flex-row flex-wrap items-center justify-center gap-6">
+          <div className="flex flex-row flex-wrap items-around justify-around gap-4">
             {commentsLoading && <Alert loading variant="primary" />}
-            {commentsIsError && (
+            {(commentsIsError) && (
               <Alert error={commentsError.message} variant="error" />
             )}
             {commentsIsSuccess &&

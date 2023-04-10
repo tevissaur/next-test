@@ -5,7 +5,7 @@ import Alert from "~/components/alert";
 
 const Services: NextPage = () => {
   const {
-    data: projects,
+    data: services,
     isLoading,
     isError,
     isSuccess,
@@ -14,9 +14,9 @@ const Services: NextPage = () => {
   return (
     <div className="flex w-full flex-col gap-0">
       {isLoading && <Alert loading variant="warning" />}
-      {(isSuccess && projects) &&
-        projects.map((project) => (
-          <ServiceTile key={project.id} service={project} />
+      {(isSuccess && services) &&
+        services.map((service) => (
+          <ServiceTile key={service.id} service={service} />
         ))}
       {isError && <Alert error={error.message} variant="error" />}
     </div>
