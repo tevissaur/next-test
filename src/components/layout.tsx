@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { Component, ReactNode } from "react";
+import { ReactNode } from "react";
 import Footer from "./footer";
 import Header from "./header";
 

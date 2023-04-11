@@ -1,5 +1,3 @@
-export const skillsUrl = "/skills"
-
 export const githubApiUrl = "https://api.github.com"
 
 export const cssLogo = "/CSS3_logo.svg"
