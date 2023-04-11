@@ -20,7 +20,7 @@ const ServiceTile: NextPage<ServiceProps> = ({ service }) => {
           : "opacity-40"
       }`}
     >
-      <div className="item-start text-left z-10 flex w-full flex-col justify-start max-h-min rounded-lg border-2 border-[#233329] bg-[#4D4730] p-6 text-white/90 shadow-2xl sm:items-end md:w-2/5 lg:w-1/3 xl:w-2/5 2xl:w-1/4">
+      <div className="item-start text-left z-10 flex w-full flex-col justify-start rounded-lg border-2 border-[#233329] bg-[#4D4730] p-6 text-white/90 shadow-2xl sm:items-end md:w-2/5 lg:w-1/3 xl:w-2/5 2xl:w-1/4">
         <VisibilitySensor
           onChange={(isVisible: boolean | ((prevState: boolean) => boolean)) =>
             setVisible(isVisible)
@@ -33,11 +33,6 @@ const ServiceTile: NextPage<ServiceProps> = ({ service }) => {
             <div className="text-lg">{service?.description}</div>
           </div>
         </VisibilitySensor>
-
-        <div className="flex h-min flex-col justify-start gap-5 rounded-lg p-3">
-          <h3 className="z-10 text-left text-3xl font-bold">Tech Stack</h3>
-          <div className="text-lg">Icons go here</div>
-        </div>
       </div>
       <Image
         className={`z-0 object-cover transition-all duration-300 opacity-80`}

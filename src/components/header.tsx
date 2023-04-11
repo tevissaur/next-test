@@ -24,6 +24,18 @@ const Header: NextPage = () => {
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
+  useEffect(() => {
+    if (window) {
+      const page = window.location.href.split("/").pop();
+      const navStatus = navButtons.map((button) => {
+        return {
+          name: button.name,
+          active: slugify(button.name, { lower: true }) === page,
+        };
+      });
+      setNavButtons(navStatus);
+    }
+  }, [])
 
   const showPageHeader = (e: React.MouseEvent) => {
     const navStatus = navButtons.map((button) => {

@@ -6,7 +6,7 @@ async function main() {
     data: {
       title: "About Me",
       content:
-        "Full Stack Web developer, and flexible problem-solver passionate about building applications that are aimed to support individuals, small businesses, and local community-run organizations. Effective at working in an agile development environment. Eager to leverage my skills as part of a fast-paced, quality-driven team to build better experiences on the web.",
+        "Full Stack Web developer, and flexible problem-solver passionate about building applications that are aimed to support individuals, small businesses, and local community-run organizations. Effective at working in an agile development environment. Eager to leverage my skills as part of a fast-paced, quality-driven team to build better experiences on the web. Have extensive experience in the retail space, ranging from a variety of in-store positions, all the way to IT, where I worked on applications and services that were critical to the store's day-to-day operations.",
       author: "me",
     },
   });
